@@ -9,14 +9,25 @@ namespace XatClient
 	{
 		public static void Main(string[] args)
 		{
-			Client client = new Client("192.168.130.26", 6969);
+            // Faig un objecte de la classe client li paso la ip del servidor del cole
+            // Esta es mi ip
+			Client client = new Client("192.168.130.81", 9898);
 			
 			if (client.ConnectToServer())
 			{
 				while (true)
 				{
-					client.WriteLine("Hola! Sóc el client enviant un missatge!");
-				}
+                    try
+                    {
+                        client.WriteLine("Hola! Sóc el client enviant un missatge!");
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("S'ha desconectat el servidor");
+                        Console.ReadKey(true);
+                    }
+                        
+                }
 			}
 		}
 	}
@@ -32,6 +43,7 @@ namespace XatClient
 		public Client(string ip, int port)
 		{
 			IPAddress address = IPAddress.Parse(ip);
+            // Lloc per agrupar la ip i el port conjuntament
 			server_endpoint = new IPEndPoint(address, port);
 		}
 
@@ -51,7 +63,8 @@ namespace XatClient
 			try
 			{
 				// tcpClient = new TcpClient(server_endpoint);
-				tcpClient = new TcpClient("localhost", 9898);
+                // Aqui pongo la ip donde me quiero conectar
+                tcpClient = new TcpClient("192.168.130.75", 9898);
 				
 				netStream = tcpClient.GetStream();
 				readerStream = new StreamReader(netStream);
