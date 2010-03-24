@@ -19,7 +19,11 @@ namespace XatClient
 				{
                     try
                     {
-                        client.WriteLine("Hola! Sóc el client enviant un missatge!");
+                        //Aqui el cliente envia todo el rato la misma frase
+                        //client.WriteLine("Hola! Sóc el client enviant un missatge!");
+                        //Con el siguiente codigo el cliente escribira por teclado y el servidor verá todo lo que vea
+                        //Lo que el cliente escriba que la consola lo lea
+                        client.WriteLine(Console.ReadLine());
                     }
                     catch (Exception ex)
                     {
